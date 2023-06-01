@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+body {
+  background-image: url('./layered-waves-haikei\ \(4\).svg');
+  background-size:auto ;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .App-logo {
   height: 40vmin;

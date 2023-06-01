@@ -1,24 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Register from './component/regandlogin/reg/reg';
+import Login from './component/regandlogin/login/login';
+import Profile from './component/regandlogin/profile/profile';
+import Bookbrowsing from './component/bookbrowsing.js/bookbrowsing';
+import ShoppingCart from './component/shoppingcart/shoppingcart';
+import Cancel from './component/ordercancelpage/cancel';
+import "./App.css"
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/profile"
+          element={
+            isAuthenticated ? (
+              <Profile cartItems={cartItems} setCartItems={setCartItems} />
+            ) : (
+              <Navigate to="/login" replace={true} />
+            )
+          }
+        />
+        <Route
+          path="/books"
+          element={
+            isAuthenticated ? (
+              <Bookbrowsing
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
+            ) : (
+              <Navigate to="/login" replace={true} />
+            )
+          }
+        /> <Route path="/cancel" element={<Cancel/>} />
+        <Route
+          path="/cart"
+          element={
+            isAuthenticated ? (
+              <ShoppingCart cartItems={cartItems} />
+            ) : (
+              <Navigate to="/login" replace={true} />
+            )
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
