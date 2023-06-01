@@ -8,6 +8,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); // New state variable
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,11 +25,28 @@ function Register() {
     });
     const data = await response.json();
     if (response.ok) {
-   
+      setRegistrationSuccess(true); // Set registration success to true
     } else {
       // display an error message
       setErrorMessage(data.message);
     }
+  }
+
+  if (registrationSuccess) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="card p-4" style={{ width: '25%' }}>
+          <div className="text-center mb-4">
+            <img src={logo} alt="Online book shopping" style={{ width: '200px' }} />
+          </div>
+          <h5 className="card-title text-left">Registration</h5>
+          <p className="text-success">Successfully registered!</p>
+          <div className="d-flex  mt-3">
+            <Link to="/login" className="btn btn-primary" style={{ backgroundColor: '#EF5F67' }}>Login</Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -72,7 +90,7 @@ function Register() {
           </div>
           <div className="d-flex  mt-3">
             <button type="submit" className="btn btn-primary mx-2" style={{ backgroundColor: '#EF5F67' }}>Submit</button>
-            <Link to="/login" className="btn btn-primary"  style={{ backgroundColor: '#EF5F67' }}>Login</Link>
+            <Link to="/login" className="btn btn-primary" style={{ backgroundColor: '#EF5F67' }}>Login</Link>
           </div>
         </form>
       </div>
