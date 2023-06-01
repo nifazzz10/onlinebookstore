@@ -11,7 +11,7 @@ function Login({ setIsAuthenticated }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Send a request to the server to authenticate the user
-    const response = await fetch('https://onlinebookedufundd.onrender.com/login', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })

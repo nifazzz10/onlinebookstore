@@ -7,7 +7,7 @@ export default function ShoppingCart({ cartItems = [], handleRemoveFromCart }) {
 
   const handleCheckout = async () => {
     // create a CheckoutSession on your server
-    const response = await fetch('https://onlinebookedufundd.onrender.com/create-checkout-session', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/create-checkout-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ export default function ShoppingCart({ cartItems = [], handleRemoveFromCart }) {
     const sessionId = data.sessionId;
 
     // redirect the user to the Stripe Checkout page
-    const stripe = window.Stripe('pk_test_51NDls2SJYorgBX6jJkGL2YBArJ1tX1iFyrYBfJ69wvZHaPW1uaHBI9pyuZVL0dhzhyxosKzgeA8TON7Szn4P47bz00iQkQaCxy');
+    const stripe = window.Stripe(process.env.REACT_APP_STRIPE_API_KEY);
     await stripe.redirectToCheckout({ sessionId });
   };
 

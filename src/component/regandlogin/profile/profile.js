@@ -14,7 +14,7 @@ function Profile({ cartItems, setCartItems }) {
     // Fetch the user's profile and order history from the server
     const fetchProfile = async () => {
       try {
-        const response = await fetch('https://onlinebookedufundd.onrender.com/profile');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND}/profile`);
         const data = await response.json();
         setProfile(data.profile);
         setOrderHistory(data.orderHistory);
@@ -39,7 +39,7 @@ function Profile({ cartItems, setCartItems }) {
       };
 
       // Send the order data to the server to store it
-      const response = await fetch('https://onlinebookedufundd.onrender.com/orders', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

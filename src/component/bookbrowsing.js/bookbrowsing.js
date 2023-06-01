@@ -15,7 +15,7 @@ export default function Bookbrowsing({ cartItems, setCartItems }) {
   useEffect(() => {
     // fetch the books from the server
     const fetchBooks = async () => {
-      const response = await fetch(`https://onlinebookedufundd.onrender.com/books?category=${category}&filter=${filter}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND}/books?category=${category}&filter=${filter}`);
       const data = await response.json();
       setBooks(data.books);
     };

@@ -17,15 +17,14 @@ function Register() {
       return;
     }
     // send a request to the server to create a new user
-    const response = await fetch('https://onlinebookedufundd.onrender.com/register', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
     const data = await response.json();
     if (response.ok) {
-      // if successful, redirect to the login page
-      window.location.href = '/login';
+   
     } else {
       // display an error message
       setErrorMessage(data.message);
